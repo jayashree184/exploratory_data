@@ -1,0 +1,242 @@
+import pandas as pd
+df = pd.DataFrame(data = {
+    'Day' : ['MON','TUE','WED','THU','FRI'],
+    'Google' : [1129,1132,1134,1152,1152],
+    'Apple' : [191,192,190,190,188]
+})
+print(df)
+
+reshaped_df = df.melt(id_vars=['Day'])
+reshaped_df
+
+reshaped_df.columns = [['Day', 'Company', 'Closing Price']]
+reshaped_df.columns
+
+reshaped_df = df.melt(id_vars=['Day'], var_name='Company', value_name='Closing Price')
+reshaped_df
+
+reshaped_df.pivot(index='Day', columns='Company')
+
+original_df = reshaped_df.pivot(index='Day', columns='Company')['Closing Price'].reset_index()
+original_df.columns.name = None
+original_df
+
+import pandas as pd
+d1 = {"Name": ["Pankaj", "Lisa", "David"], "ID": [1, 2, 3], "Role": ["CEO", "Editor", "Author"]}
+df = pd.DataFrame(d1)
+print(df)
+df_melted = pd.melt(df, id_vars=["ID"], value_vars=["Name", "Role"])
+print(df_melted)
+
+df_melted = pd.melt(df, id_vars=["ID"], value_vars=["Name", "Role"], var_name="Attribute", value_name="Value")
+df_melted
+
+df_melted = pd.melt(df, id_vars=["ID", "Name"], value_vars=["Role"])
+print(df_melted)
+
+df_melted = pd.melt(df, id_vars=["Name"], value_vars=["Role"])
+print(df_melted)
+
+import pandas as pd
+d1 = {"Name": ["Pankaj", "Lisa", "David"], 
+      "ID": [1, 2, 3], 
+      "Role": ["CEO", "Editor", "Author"]}
+df = pd.DataFrame(d1)
+#print(df)
+df_melted = pd.melt(df, id_vars=["ID"], value_vars=["Name", "Role"],  var_name="Attribute", value_name="Value")
+#print(df_melted)
+df_unmelted = df_melted.pivot(index='ID', columns='Attribute')
+print(df_unmelted)
+
+df_unmelted = df_unmelted['Value'].reset_index()
+df_unmelted.columns.name = None
+print(df_unmelted)
+
+df = pd.DataFrame({'A':{0: 'a', 1: 'b', 2: 'c'},
+                   'B':{0: 1, 1: 3, 2: 5},
+                   'C':{0: 2, 1: 4, 2: 6}})
+df
+
+pd.melt(df, id_vars=['A'], value_vars=['B'])
+
+pd.melt(df, id_vars=['A'], value_vars=['B', 'C'])
+
+pd.melt(df, id_vars=['A'], value_vars=['B'],
+        var_name='myVarname', value_name='myValname')
+
+pd.melt(df, id_vars=['A'], value_vars=['B', 'C'], ignore_index=False)
+
+df.columns = [list('ABC'), list('DEF')]
+df
+
+pd.melt(df, col_level=0, id_vars=['A'], value_vars=['B'])
+
+pd.melt(df, id_vars=[('A', 'D')], value_vars=[('B', 'E')])
+
+df = pd.DataFrame({'foo': ['one', 'one', 'one', 'two', 'two', 'two'],
+                   'bar': ['A', 'B', 'C', 'A', 'B', 'C'],
+                   'baz': [1,2,3,4,5,6],
+                   'zoo': ['x', 'y', 'z', 'q', 'w', 't']})
+df
+
+df.pivot(index='foo', columns='bar', values='baz')
+
+df.pivot(index='foo', columns='bar')['baz']
+
+df.pivot(index='foo', columns='bar', values=['baz', 'zoo'])
+
+df = pd.DataFrame({
+     "lev1": [1, 1, 1, 2, 2, 2],
+     "lev2": [1, 1, 2, 1, 1, 2],
+     "lev3": [1, 2, 1, 2, 1, 2],
+     "lev4": [1, 2, 3, 4, 5, 6],
+     "values": [0, 1, 2, 3, 4, 5]})
+df
+
+df.pivot(index="lev1", columns=["lev2", "lev3"],values="values")
+
+df.pivot(index=["lev1", "lev2"], columns=["lev3"],values="values")
+
+df = pd.DataFrame({"foo": ['one', 'one', 'two', 'two'],
+                   "bar": ['A', 'A', 'B', 'C'],
+                   "baz": [1, 2, 3, 4]})
+df
+
+df.pivot(index="foo", columns="bar", values="baz")
+
+greet = lambda : print('Hello World')
+greet()
+
+greet_user = lambda name : print('Hey there,',name)
+greet_user('Delilah')
+
+import pandas as pd
+import matplotlib.pyplot as plt
+cars_df = pd.read_csv("C:/Users/CSE WPT/Downloads/archive/Cars93.csv")
+cars_df.head()
+mainlist = cars_df.loc[cars_df['Manufacturer']=='Audi'].values.tolist()
+cars_df=cars_df['Type']
+list_of_item=cars_df.to_list()
+i=1
+for x in list_of_item:
+    if x=="Audi":
+        mainlist.append(cars_df[:i])
+i=i+1
+#plt.pie('x')
+#plt.show()
+
+mainlist
+
+import pandas as pd
+df=pd.read_excel("C:/Users/CSE WPT/Downloads/marks.xlsx")
+print(df)
+
+import numpy as np
+
+my_list = [1, 2, 2, 2, 4, 5, 6, 6, 6, 9, 10, 10, 10, 11, 14, 14, 15, 18, 19, 20]
+
+def get_mean(my_data):
+    return sum(my_data)/(len(my_data)*1.0)
+
+get_mean(my_list)
+
+import numpy as np
+my_list = [1, 2, 2, 2, 4, 5, 6, 6, 6, 9, 10, 10, 10, 11, 14, 14, 15, 18, 19, 20]
+def get_mean(my_data):
+    return sum(my_data)/(len(my_data)*1.0)
+get_mean(my_list)
+
+my_np_list = np.asarray(my_list)
+
+np.mean(my_np_list)
+
+my_np_list = np.asarray(my_list)
+np.mean(my_np_list)
+
+my_list.append(100)
+
+get_mean(my_list)
+
+my_list.append(100)
+get_mean(my_list)
+
+np.median(my_list)
+
+my_list
+
+np.median(my_np_list)
+
+my_np_list
+
+from scipy.stats import mode
+
+mode(my_list)
+
+my_list_str = ['a', 'b', 'c', 'a', 'b', 'b', 'c', 'a', 'a', 'b', 'd']
+
+mode(my_list_str)
+
+import numpy as np
+
+my_list = np.asarray([1, 2, 2, 2, 4, 5, 6, 6, 6, 9, 10, 10, 10, 11, 14, 14, 15, 18, 19, 20])
+
+np.var(my_list)
+
+np.std(my_list)
+
+np.mean(my_list)
+
+lower_range = 9.2 - 5.8
+
+higher_range = 9.2 + 5.8
+
+lower_range
+
+higher_range
+
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+x = np.random.normal(50, 5, 3000)
+
+x
+
+print("Max is {}".format(max(x)))
+print("Min is {}".format(max(x)))
+print("Max - Min is {}".format(max(x) - min(x)))
+
+sns.distplot(x, kde=False, bins=5, hist_kws=dict(edgecolor="k",linewidth=2))
+plt.xlabel('Intervals')
+plt.ylabel('Frequency')
+plt.show()
+
+sns.distplot(x, kde=False, bins=10, hist_kws=dict(edgecolor="k",linewidth=2))
+plt.xlabel('Intervals')
+plt.ylabel('Frequency')
+plt.show()
+
+sns.distplot(x, kde=False, bins=50, hist_kws=dict(edgecolor="k",linewidth=2))
+plt.xlabel('Intervals')
+plt.ylabel('Frequency')
+plt.show()
+
+sns.distplot(x, kde=False, bins=30, hist_kws=dict(edgecolor="k",linewidth=2))
+plt.xlabel('Intervals')
+plt.ylabel('Frequency')
+plt.show()
+
+sns.distplot(x, kde=False, bins=30, norm_hist=True, hist_kws=dict(edgecolor="k",linewidth=2))
+plt.xlabel('Intervals')
+plt.ylabel('Relative Frequency')
+plt.show()
+
+sns.distplot(x, kde=False, bins=10, norm_hist=True, hist_kws=dict(edgecolor="k",linewidth=2))
+plt.xticks(range(28, 70, 4))
+plt.ylabel('Density')
+plt.show()
+
+plt.axvline(x.mean(), color='b', linestyle='dashed', linewidth=1)
+sns.distplot(x, kde=True, bins=30, hist=False)
+plt.ylabel('Density')
+
